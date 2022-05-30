@@ -12,8 +12,8 @@ public class TestByteBufferReadWrite {
         buffer.put(new byte[]{0x62, 0x63, 0x64}); // b  c  d
         debugAll(buffer);
 //        System.out.println(buffer.get());
-        buffer.flip();
-        System.out.println(buffer.get());
+        buffer.flip(); // 如果不flip，不会报错，会读取position下一个byte，并将position++
+        System.out.println("!!!!!!!!!!!!!!!!" + buffer.get());
         debugAll(buffer);
         buffer.compact();
         debugAll(buffer);

@@ -5,6 +5,7 @@ import cn.itcast.message.RpcResponseMessage;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.AttributeMap;
 import io.netty.util.concurrent.Promise;
 import lombok.extern.slf4j.Slf4j;
 

@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.Charset;
-
+//用来测试的channel
 @Slf4j
 public class TestEmbeddedChannel {
     public static void main(String[] args) {

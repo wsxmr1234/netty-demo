@@ -4,6 +4,8 @@ import cn.itcast.message.*;
 import cn.itcast.protocol.MessageCodecSharable;
 import cn.itcast.protocol.ProcotolFrameDecoder;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.UnpooledByteBufAllocator;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -68,6 +70,7 @@ public class ChatClient {
                                 if (response.isSuccess()) {
                                     // 如果登录成功
                                     LOGIN.set(true);
+//                                    LOGIN.compareAndSet(false, true);
                                 }
                                 // 唤醒 system in 线程
                                 WAIT_FOR_LOGIN.countDown();
@@ -103,7 +106,7 @@ public class ChatClient {
                                 // 如果登录失败
                                 if (!LOGIN.get()) {
                                     ctx.channel().close();
-                                    return;
+                                    return;   // return什么作用？ 思考一下
                                 }
                                 while (true) {
                                     System.out.println("==================================");

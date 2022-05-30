@@ -20,6 +20,6 @@ public class TestJdkFuture {
         });
         // 3. 主线程通过 future 来获取结果
         log.debug("等待结果");
-        log.debug("结果是 {}", future.get());
+        log.debug("结果是 {}", future.get());  // get()是同步方法
     }
 }

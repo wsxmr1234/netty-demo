@@ -13,15 +13,15 @@ public class  TestByteBufferString {
         buffer1.put("hello".getBytes());
         debugAll(buffer1);
 
-        // 2. Charset
+        // 2. Charset  返回的bytebuffer会自动切换为读模式
         ByteBuffer buffer2 = StandardCharsets.UTF_8.encode("hello");
         debugAll(buffer2);
 
-        // 3. wrap
+        // 3. wrap   将字节数组包装成bytebuffer
         ByteBuffer buffer3 = ByteBuffer.wrap("hello".getBytes());
         debugAll(buffer3);
 
-        // 4. 转为字符串
+        // 4. 转为字符串 返回的是charbuffer，toString()返回字符串
         String str1 = StandardCharsets.UTF_8.decode(buffer2).toString();
         System.out.println(str1);
 

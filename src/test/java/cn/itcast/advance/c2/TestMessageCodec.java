@@ -26,7 +26,7 @@ public class TestMessageCodec {
         ByteBuf s1 = buf.slice(0, 100);
         ByteBuf s2 = buf.slice(100, buf.readableBytes() - 100);
         s1.retain(); // 引用计数 2
-        channel.writeInbound(s1); // release 1
+        channel.writeInbound(s1); // 会调用一次release 使引用计数减为1
         channel.writeInbound(s2);
     }
 }

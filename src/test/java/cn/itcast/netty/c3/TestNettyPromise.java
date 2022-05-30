@@ -19,18 +19,19 @@ public class TestNettyPromise {
             // 3. 任意一个线程执行计算，计算完毕后向 promise 填充结果
             log.debug("开始计算...");
             try {
-                int i = 1 / 0;
+//                int i = 1 / 0;
                 Thread.sleep(1000);
                 promise.setSuccess(80);
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 promise.setFailure(e);
             }
 
         }).start();
         // 4. 接收结果的线程
         log.debug("等待结果...");
-        log.debug("结果是: {}", promise.get());
+        log.debug("D等待结果: {}", promise.getNow());
+        log.debug("结果是: {}", promise.get());// 阻塞，和netty future一样，继承netty future接口
     }
 
 }

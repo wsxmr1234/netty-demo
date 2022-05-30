@@ -49,13 +49,17 @@ public class CloseFutureClient {
 
         // 获取 CloseFuture 对象， 1) 同步处理关闭， 2) 异步处理关闭
         ChannelFuture closeFuture = channel.closeFuture();
+        // 这个注释是同步来处理关闭
         /*log.debug("waiting close...");
-        closeFuture.sync();
+        closeFuture.sync(); // 阻塞方法，当channel被关闭才继续运行
         log.debug("处理关闭之后的操作");*/
         System.out.println(closeFuture.getClass());
-        closeFuture.addListener((ChannelFutureListener) future -> {
-            log.debug("处理关闭之后的操作");
-            group.shutdownGracefully();
+        closeFuture.addListener(new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture future) throws Exception {
+                log.debug("处理关闭后的操作");
+                group.shutdownGracefully();
+            }
         });
     }
 }

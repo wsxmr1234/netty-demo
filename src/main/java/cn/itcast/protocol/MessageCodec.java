@@ -19,6 +19,7 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
 
     @Override
     public void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {
+        log.debug("encode....");
         // 1. 4 字节的魔数
         out.writeBytes(new byte[]{1, 2, 3, 4});
         // 2. 1 字节的版本,
@@ -44,6 +45,7 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
+        log.debug("decode...");
         int magicNum = in.readInt();
         byte version = in.readByte();
         byte serializerType = in.readByte();

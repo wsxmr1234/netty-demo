@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class TestNettyFuture {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         NioEventLoopGroup group = new NioEventLoopGroup();
+        // EventLoop也算一个线程池，只是其中只有一个线程。他继承了EVentloopGroup
         EventLoop eventLoop = group.next();
         Future<Integer> future = eventLoop.submit(new Callable<Integer>() {
             @Override
@@ -24,12 +25,14 @@ public class TestNettyFuture {
                 return 70;
             }
         });
+        // 同步处理结果
 //        log.debug("等待结果");
 //        log.debug("结果是 {}", future.get());
+        // 异步处理结果
         future.addListener(new GenericFutureListener<Future<? super Integer>>(){
             @Override
             public void operationComplete(Future<? super Integer> future) throws Exception {
-                log.debug("接收结果:{}", future.getNow());
+                log.debug("接收结果:{}", future.getNow());  // getNow()是非阻塞，由于这个是执行完毕的回调，不需要阻塞
             }
         });
     }

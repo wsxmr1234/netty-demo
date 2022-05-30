@@ -42,10 +42,13 @@ public class RpcClient {
                     String.class,
                     new Class[]{String.class},
                     new Object[]{"张三"}
-            )).addListener(promise -> {
-                if (!promise.isSuccess()) {
-                    Throwable cause = promise.cause();
-                    log.error("error", cause);
+            )).addListener(new ChannelFutureListener() {
+                @Override
+                public void operationComplete(ChannelFuture future) throws Exception {
+                    if (!future.isSuccess()) {
+                        Throwable cause = future.cause();
+                        log.error("error", cause);
+                    }
                 }
             });
 
